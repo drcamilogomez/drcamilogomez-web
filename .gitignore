@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Future Next.js / Node
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.local
