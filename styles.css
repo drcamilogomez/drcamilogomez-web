@@ -461,9 +461,9 @@ h1 {
 .delay-2 { transition-delay: .50s; }
 .delay-3 { transition-delay: .80s; }
 .specialty.reveal.visible:hover {
-  transform: translateY(-10px) scale(1.015);
-  background: rgba(255,255,255,.92);
-  box-shadow: 0 32px 80px rgba(58,58,58,.12);
+  transform: translateY(-2px) scale(1.004);
+  background: rgba(255,255,255,.80);
+  box-shadow: 0 14px 32px rgba(58,58,58,.06);
 }
 @keyframes breathe {
   0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
