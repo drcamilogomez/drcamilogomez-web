@@ -471,7 +471,11 @@ h1 {
 }
 
 @media (max-width: 940px) {
-  .desktop-nav a:not(.nav-cta) { display: none; }
+  .services-list {
+  grid-template-columns: 1fr;
+  }
+  .desktop-nav a:not(.nav-cta) { display: none; 
+  }
   .hero,
   .doctor-section {
     grid-template-columns: 1fr;
@@ -526,6 +530,45 @@ h1 {
   .doctor-section,
   .leadership,
   .specialties,
+  .services {
+  position: relative;
+  padding: 8vw clamp(22px, 5vw, 72px);
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 26px;
+  border-radius: 24px;
+  text-decoration: none;
+  color: var(--graphite);
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.6);
+  transition: all .35s ease;
+}
+
+.service-item span {
+  font-size: 26px;
+}
+
+.service-item p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.service-item:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 20px 50px rgba(58,58,58,.08);
+}
   .testimonials {
     padding-left: 18px;
     padding-right: 18px;
