@@ -4,11 +4,11 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
+    } else {
+      entry.target.classList.remove("visible");
     }
   });
-}, { threshold: 0.15 });
-
+}, { threshold: 0.18 });
 revealEls.forEach((el) => observer.observe(el));
 
 document.addEventListener("mousemove", (event) => {
