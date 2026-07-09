@@ -323,7 +323,7 @@ h1 {
   margin-bottom: 54px;
 }
 .section-head > p:not(.eyebrow) {
-  max-width: 720px;
+  max-width: 1000px;
   margin-top: 18px;
   font-size: 18px;
   line-height: 1.8;
