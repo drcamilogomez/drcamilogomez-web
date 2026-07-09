@@ -252,7 +252,7 @@ h1 {
 .doctor-copy h2,
 .section-head h2,
 .final-cta h2 {
-  font-size: clamp(42px, 5.5vw, 78px);
+  font-size: clamp(40px, 4.8vw, 64px);
   line-height: .94;
   letter-spacing: -.065em;
   font-weight: 670;
@@ -322,7 +322,14 @@ h1 {
   max-width: 880px;
   margin-bottom: 54px;
 }
-
+.section-head > p:not(.eyebrow) {
+  max-width: 720px;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--soft);
+  font-weight: 400;
+}
 .leadership-grid,
 .testimonial-grid {
   display: grid;
