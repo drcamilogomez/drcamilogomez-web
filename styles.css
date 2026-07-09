@@ -500,8 +500,18 @@ h1 {
   transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
 }
 
-.service-item span {
-  font-size: 26px;
+.service-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: rgba(73,190,198,.10);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  line-height: 1;
+  transition: .35s ease;
 }
 
 .service-item p {
@@ -515,6 +525,27 @@ h1 {
   background: rgba(255,255,255,.92);
   box-shadow: 0 20px 50px rgba(58,58,58,.08);
 }
+.service-item:hover .service-icon {
+  transform: scale(1.08);
+  background: rgba(73,190,198,.16);
+  color: var(--graphite);
+}
+
+.service-item:hover .service-icon svg {
+  stroke: var(--graphite);
+  transform: scale(1.08);
+}
+
+.service-arrow {
+  color: var(--teal);
+  font-size: 26px;
+  transition: .35s ease;
+}
+
+.service-item:hover .service-arrow {
+  transform: translateX(8px);
+}
+
 @media (max-width: 940px) {
   .services-list {
   grid-template-columns: 1fr;
