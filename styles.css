@@ -540,11 +540,12 @@ h1 {
   margin-left: auto;
   color: var(--teal);
   font-size: 26px;
-  transition: .35s ease;
+  transition: transform .35s ease, color .35s ease;
+  
 }
 
 .service-item:hover .service-arrow {
-  transform: translateX(8px);
+  transform: translateX(6px);
 }
 
 @media (max-width: 940px) {
