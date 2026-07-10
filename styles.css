@@ -537,6 +537,7 @@ h1 {
 }
 
 .service-arrow {
+  margin-left: auto;
   color: var(--teal);
   font-size: 26px;
   transition: .35s ease;
