@@ -659,3 +659,19 @@ h1 {
     border-radius: 32px;
   }
 }
+.service-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--graphite);
+  flex-shrink: 0;
+}
+
+.service-icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
