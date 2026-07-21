@@ -330,11 +330,11 @@ h1 {
   color: var(--soft);
   font-weight: 400;
 }
-.leadership-grid,
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
 }
 
 .info-card,
@@ -676,4 +676,9 @@ h1 {
   width: 24px;
   height: 24px;
   stroke: currentColor;
+}
+@media (max-width: 900px) {
+    .leadership-grid {
+        grid-template-columns: 1fr;
+    }
 }
