@@ -1,13 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    {
-      "source": "/ecocardiograma-medellin",
-      "destination": "/ecocardiograma-medellin/index.html"
-    },
-    {
-      "source": "/ecocardiograma-medellin/",
-      "destination": "/ecocardiograma-medellin/index.html"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
