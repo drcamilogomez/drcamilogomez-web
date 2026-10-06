@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Test de 60 segundos del Dr. Camilo Gómez, cardiólogo: descubre la edad de tu corazón.">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>¿Qué edad tiene tu corazón?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one mobile column on monitor graph paper; brand palette of drcamilogomez.com (graphite, ivory, teal) */
+:root{
+  --paper:#f8f7f5; --grid:#e6f1f0; --grid-major:#cfe6e5;
+  --ink:#3a3a3a; --muted:#6f6b67; --line:#e2dfda; --card:#fcfbf8;
+  --teal:#33c7c7; --pulse:#127a80; --mist:rgba(51,199,199,.16); --glass:rgba(255,255,255,.62); --glass-edge:rgba(255,255,255,.75); --shadow:0 24px 70px rgba(38,38,38,.10); --pulse-soft:#e1f5f5; --on-pulse:#ffffff;
+  --ok:#1f7a4d; --ok-soft:#e1f2e8; --warn:#9a6200; --warn-soft:#fcefd6; --bad:#b4202f; --bad-soft:#fbe1e3;
+  --f-display:"Inter",-apple-system,system-ui,"Segoe UI",sans-serif;
+  --f-body:"Inter",-apple-system,system-ui,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1e1f1f; --grid:#242a2a; --grid-major:#2c3636;
+  --ink:#f3f1ee; --muted:#b5b0aa; --line:#383a3a; --card:#262828;
+  --teal:#33c7c7; --pulse:#4fd6d6; --mist:rgba(51,199,199,.10); --glass:rgba(38,40,40,.72); --glass-edge:rgba(255,255,255,.08); --shadow:0 24px 70px rgba(0,0,0,.35); --pulse-soft:#1d3a3b; --on-pulse:#102020;
+  --ok:#5fd39a; --ok-soft:#14301f; --warn:#f2b752; --warn-soft:#33270f; --bad:#ff6b78; --bad-soft:#3a171b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1e1f1f; --grid:#242a2a; --grid-major:#2c3636;
+  --ink:#f3f1ee; --muted:#b5b0aa; --line:#383a3a; --card:#262828;
+  --teal:#33c7c7; --pulse:#4fd6d6; --mist:rgba(51,199,199,.10); --glass:rgba(38,40,40,.72); --glass-edge:rgba(255,255,255,.08); --shadow:0 24px 70px rgba(0,0,0,.35); --pulse-soft:#1d3a3b; --on-pulse:#102020;
+  --ok:#5fd39a; --ok-soft:#14301f; --warn:#f2b752; --warn-soft:#33270f; --bad:#ff6b78; --bad-soft:#3a171b; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(ellipse 90% 60% at 85% 0%,var(--mist) 0%,transparent 70%),radial-gradient(ellipse 70% 50% at 0% 100%,var(--mist) 0%,transparent 70%);background-attachment:fixed;}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:28px 56px;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font:600 11px/1.3 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 clamp(38px,11vw,56px)/1 var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.045em}
+.lede{margin:0;color:var(--muted);max-width:60ch}
+.ecg{width:100%;height:44px;display:block}
+.ecg path{fill:none;stroke:var(--teal);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:trace 2.4s ease-out .2s forwards}
+@keyframes trace{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.ecg path{animation:none;stroke-dashoffset:0}}
+.card{background:var(--glass);border:1px solid var(--glass-edge);border-radius:24px;padding:24px 20px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);display:flex;flex-direction:column;gap:18px}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+legend,.lab{font-weight:700;padding:0;margin-bottom:2px}
+.hint{font-size:14px;color:var(--muted);margin:-4px 0 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row>*{min-width:0}
+.row .seg{flex-wrap:nowrap}.row .seg label{min-width:0}
+input[type=text],input[type=number]{width:100%;font:600 20px/1 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px}
+input[type=text]{font:600 18px/1.2 var(--f-body)}
+input:focus-visible,.seg label:focus-within,button:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.unit{display:flex;align-items:center;gap:8px}
+.unit span{font:500 14px var(--f-mono);color:var(--muted);flex:none}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{flex:1 1 0;min-width:90px;position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;text-align:center;padding:12px 10px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--card)}
+.seg input:checked+span{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.consent input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--ink)}
+.btn{appearance:none;border:0;border-radius:999px;padding:16px 20px;font:600 17px/1.15 var(--f-body);background:var(--ink);color:var(--paper);cursor:pointer;text-align:center;text-decoration:none;display:block;width:100%}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.wa{background:var(--pulse);color:var(--on-pulse)}
+.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.err{color:var(--bad);font-weight:600;margin:0}
+.privacy{font-size:14px;color:var(--muted);margin:0}
+/* Result */
+.readout{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.readout .k{font:600 11px/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.big{font:700 clamp(80px,26vw,128px)/.9 var(--f-display);letter-spacing:-.06em;color:var(--ink);font-variant-numeric:tabular-nums}
+.big small{font-size:.26em;letter-spacing:-.01em;color:var(--pulse);font-weight:600;margin-left:6px}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 12px;font-weight:700;font-size:15px}
+.pill::before{content:"";width:10px;height:10px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stats div{background:var(--card);padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.stats b{font:600 22px var(--f-mono);font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--muted)}
+.note{border-left:3px solid var(--teal);padding:2px 0 2px 12px;margin:0}
+.levers{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.disc{font-size:13px;color:var(--muted);margin:0}
+footer{font-size:14px;color:var(--muted);text-align:center;display:flex;flex-direction:column;gap:4px}
+footer b{color:var(--ink)}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Vive+ Medellín 2026 · Test de 60 segundos</div>
+    <h1>¿Qué edad tiene tu corazón?</h1>
+    <svg class="ecg" viewBox="0 0 560 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26H120l8-6 8 6h20l6 4 8-28 8 38 7-14h28l10-8 12 8H330l8-6 8 6h20l6 4 8-28 8 38 7-14h28l10-8 12 8H560"/></svg>
+    <p class="lede">La edad que no aparece en tu cédula. Responde 7 preguntas y te mostramos una estimación basada en el estudio de Framingham.</p>
+  </header>
+
+  <form id="f" class="card" novalidate>
+    <fieldset>
+      <label class="lab" for="nombre">Tu nombre</label>
+      <input type="text" id="nombre" autocomplete="given-name" placeholder="Ej.: Marta">
+    </fieldset>
+
+    <div class="row">
+      <fieldset>
+        <label class="lab" for="edad">Edad</label>
+        <div class="unit"><input type="number" id="edad" inputmode="numeric" min="18" max="99" placeholder="52"><span>años</span></div>
+      </fieldset>
+      <fieldset>
+        <legend>Sexo</legend>
+        <div class="seg">
+          <label><input type="radio" name="sexo" id="sexo-f" value="F"><span>Mujer</span></label>
+          <label><input type="radio" name="sexo" id="sexo-m" value="M"><span>Hombre</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <label class="lab" for="peso">Peso</label>
+        <div class="unit"><input type="number" id="peso" inputmode="decimal" min="30" max="250" placeholder="70"><span>kg</span></div>
+      </fieldset>
+      <fieldset>
+        <label class="lab" for="talla">Estatura</label>
+        <div class="unit"><input type="number" id="talla" inputmode="numeric" min="120" max="220" placeholder="165"><span>cm</span></div>
+      </fieldset>
+    </div>
+
+    <fieldset>
+      <legend>¿Fumas?</legend>
+      <div class="seg">
+        <label><input type="radio" name="fuma" id="fuma-si" value="1"><span>Sí</span></label>
+        <label><input type="radio" name="fuma" id="fuma-no" value="0"><span>No</span></label>
+      </div>
+      <p class="hint">Si lo dejaste hace menos de un año, marca «Sí».</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Sabes tu presión arterial?</legend>
+      <div class="seg">
+        <label><input type="radio" name="sabe" id="sabe-si" value="1"><span>Sí</span></label>
+        <label><input type="radio" name="sabe" id="sabe-no" value="0"><span>No la sé</span></label>
+      </div>
+      <div id="pas-box" hidden>
+        <label class="lab" for="pas">El número de arriba (sistólica)</label>
+        <div class="unit"><input type="number" id="pas" inputmode="numeric" min="80" max="240" placeholder="120"><span>mmHg</span></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Tomas medicamento para la presión?</legend>
+      <div class="seg">
+        <label><input type="radio" name="trat" id="trat-si" value="1"><span>Sí</span></label>
+        <label><input type="radio" name="trat" id="trat-no" value="0"><span>No</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Tienes diabetes?</legend>
+      <div class="seg">
+        <label><input type="radio" name="dm" id="dm-si" value="1"><span>Sí</span></label>
+        <label><input type="radio" name="dm" id="dm-no" value="0"><span>No</span></label>
+      </div>
+    </fieldset>
+
+    <p class="err" id="err" hidden></p>
+    <button class="btn" type="submit" id="go">Ver la edad de mi corazón</button>
+    <p class="privacy">Tus respuestas no se guardan ni se envían a ningún lado: el cálculo ocurre en tu celular.</p>
+  </form>
+
+  <section id="res" class="card" hidden aria-live="polite">
+    <div class="readout">
+      <span class="k" id="r-who">Tu corazón tiene aproximadamente</span>
+      <div class="big"><span id="r-ha">—</span><small>años</small></div>
+      <span class="pill" id="r-pill"></span>
+    </div>
+    <div class="stats">
+      <div><b id="r-age">—</b><span>Edad en tu cédula</span></div>
+      <div><b id="r-risk">—</b><span>Riesgo cardiovascular a 10 años</span></div>
+    </div>
+    <p class="note" id="r-msg"></p>
+    <div>
+      <p class="lab" style="margin:0 0 6px">Lo que más está sumando años</p>
+      <ul class="levers" id="r-levers"></ul>
+    </div>
+
+    <label class="consent" for="ok-datos"><input type="checkbox" id="ok-datos"><span id="consent-text"></span></label>
+    <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Recibir mi plan de 30 días por WhatsApp</a>
+    <a class="btn ghost" id="wa-q" href="#" target="_blank" rel="noopener">Enviar una pregunta para la charla</a>
+    <button class="btn ghost" type="button" id="again">Hacer el test otra vez</button>
+    <p class="disc">Estimación educativa con el modelo de Framingham sin exámenes de laboratorio (D'Agostino et al., 2008). Es más precisa entre los 30 y los 74 años y no reemplaza una valoración médica.</p>
+  </section>
+
+  <footer>
+    <span><b id="doc-name"></b> · <span id="doc-title"></span></span>
+    <a href="https://www.drcamilogomez.com" target="_blank" rel="noopener" style="color:var(--pulse);font-weight:600">www.drcamilogomez.com</a>
+    <span>Vive+ Medellín · 8 y 9 de octubre de 2026</span>
+  </footer>
+</div>
+
+<script>
+// ===== Datos del médico: cambiar aquí =====
+const CONFIG = {
+  doctor: "Dr. Camilo Gómez",
+  titulo: "Cardiólogo",
+  whatsapp: "573052742623" // número con indicativo 57, sin + ni espacios
+};
+
+document.getElementById("doc-name").textContent = CONFIG.doctor;
+document.getElementById("doc-title").textContent = CONFIG.titulo;
+document.getElementById("consent-text").textContent =
+  "Autorizo a " + CONFIG.doctor + " a tratar estos datos para enviarme mi resultado, contenidos de salud cardiovascular e invitaciones, según la Ley 1581 de 2012. Puedo pedir que me retiren cuando quiera.";
+
+// Framingham 2008, modelo con IMC (sin laboratorio)
+const COEF = {
+  M:{a:3.11296,b:0.79277,su:1.85508,st:1.92672,s:0.70953,d:0.53160,S0:0.88431,m:23.9388},
+  F:{a:2.72107,b:0.51125,su:2.81291,st:2.88267,s:0.61868,d:0.77763,S0:0.94833,m:26.0145}
+};
+function framingham(sex, age, bmi, sbp, treated, smoker, diabetic){
+  const c = COEF[sex];
+  const L = c.a*Math.log(age) + c.b*Math.log(bmi) + (treated?c.st:c.su)*Math.log(sbp) + c.s*smoker + c.d*diabetic;
+  const risk = 1 - Math.pow(c.S0, Math.exp(L - c.m));
+  const heartAge = Math.exp((L - c.b*Math.log(22.5) - c.su*Math.log(125)) / c.a);
+  return {risk, heartAge};
+}
+
+const $ = id => document.getElementById(id);
+const radio = n => { const el = document.querySelector('input[name="'+n+'"]:checked'); return el ? el.value : null; };
+const num = id => { const v = parseFloat(String($(id).value).replace(",", ".")); return isFinite(v) ? v : null; };
+
+document.querySelectorAll('input[name="sabe"]').forEach(r => r.addEventListener("change", () => {
+  $("pas-box").hidden = radio("sabe") !== "1";
+}));
+
+let last = null;
+
+$("f").addEventListener("submit", e => {
+  e.preventDefault();
+  const nombre = $("nombre").value.trim();
+  const edad = num("edad"), peso = num("peso"), talla = num("talla");
+  const sexo = radio("sexo"), fuma = radio("fuma"), sabe = radio("sabe"), trat = radio("trat"), dm = radio("dm");
+  const pas = sabe === "1" ? num("pas") : null;
+  const missing = [];
+  if (!edad || edad < 18 || edad > 99) missing.push("tu edad");
+  if (!sexo) missing.push("tu sexo");
+  if (!peso || peso < 30 || peso > 250) missing.push("tu peso en kg");
+  if (!talla || talla < 120 || talla > 220) missing.push("tu estatura en cm");
+  if (!fuma) missing.push("si fumas");
+  if (!sabe) missing.push("si sabes tu presión");
+  if (sabe === "1" && (!pas || pas < 80 || pas > 240)) missing.push("tu presión sistólica (entre 80 y 240)");
+  if (!trat) missing.push("si tomas medicamento para la presión");
+  if (!dm) missing.push("si tienes diabetes");
+  if (missing.length){ $("err").textContent = "Falta: " + missing.join(", ") + "."; $("err").hidden = false; return; }
+  $("err").hidden = true;
+
+  const bmi = peso / Math.pow(talla/100, 2);
+  const ageM = Math.min(74, Math.max(30, edad));
+  const sbp = pas || 125;
+  const r = framingham(sexo, ageM, Math.min(50, Math.max(15, bmi)), sbp, trat==="1", +fuma, +dm);
+  const ha = Math.round(r.heartAge);
+  const haTxt = ha > 85 ? "+85" : ha < 30 ? "<30" : String(ha);
+  const diff = ha - edad;
+
+  $("r-who").textContent = (nombre ? nombre + ", tu" : "Tu") + " corazón tiene aproximadamente";
+  $("r-ha").textContent = haTxt;
+  $("r-age").textContent = edad;
+  $("r-risk").textContent = (r.risk*100).toFixed(r.risk < 0.1 ? 1 : 0) + " %";
+
+  const pill = $("r-pill");
+  let level, msg;
+  if (diff <= 0){ level="ok"; pill.textContent = "Más joven que tu cédula"; msg = "Vas bien. Ahora el reto es mantenerlo: conoce tus números cada año."; }
+  else if (diff <= 5){ level="warn"; pill.textContent = diff + (diff===1?" año":" años") + " por encima"; msg = "Hay margen de mejora. Los cambios pequeños y sostenidos son los que más años le devuelven a tu corazón."; }
+  else { level="bad"; pill.textContent = diff + " años por encima"; msg = "Tu corazón está envejeciendo más rápido que tú. Vale la pena una valoración cardiovascular pronto."; }
+  pill.className = "pill " + level;
+
+  if (!pas){
+    const hi = framingham(sexo, ageM, Math.min(50, Math.max(15, bmi)), 145, trat==="1", +fuma, +dm);
+    msg = "Tu resultado está incompleto: calculamos con una presión normal (125). Si la tuya fuera 145, tu corazón tendría unos " + Math.round(hi.heartAge) + " años. Pide tu plan por WhatsApp y te invitamos a medirla sin costo en la Semana del Corazón.";
+  }
+  $("r-msg").textContent = msg;
+
+  const levers = [];
+  if (fuma === "1") levers.push("Fumar: es el factor que más años suma y el que más rápido se recupera al dejarlo.");
+  if (pas && pas >= 130) levers.push("Presión de " + pas + " mmHg: la meta suele estar por debajo de 130.");
+  if (!pas) levers.push("No conocer tu presión: es el número que más pesa y la mitad de quienes la tienen alta no lo saben.");
+  if (bmi >= 25) levers.push("Índice de masa corporal de " + bmi.toFixed(1).replace(".", ",") + ": la meta es entre 18,5 y 24,9.");
+  if (dm === "1") levers.push("Diabetes: controlar la glucosa protege directamente las arterias.");
+  if (!levers.length) levers.push("Ninguno de los factores medidos está fuera de meta. Sigue con movimiento, sueño y buena alimentación.");
+  $("r-levers").replaceChildren(...levers.map(t => { const li = document.createElement("li"); li.textContent = t; return li; }));
+
+  last = {nombre, edad, ha: haTxt, pas, risk: r.risk};
+  updateWa();
+  $("f").hidden = true; $("res").hidden = false;
+  $("res").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+});
+
+function waLink(text){ return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); }
+function updateWa(){
+  const ok = $("ok-datos").checked;
+  const a = $("wa");
+  a.setAttribute("aria-disabled", ok ? "false" : "true");
+  if (last){
+    a.href = waLink("Hola, soy " + (last.nombre || "asistente de Vive+") + ". Hice el test en Vive+ Medellín: tengo " + last.edad + " años y mi corazón dio " + last.ha + ". " + (last.pas ? "Mi presión es " + last.pas + "." : "No sé mi presión.") + " Autorizo el tratamiento de mis datos y quiero recibir mi plan de 30 días.");
+  }
+}
+$("ok-datos").addEventListener("change", updateWa);
+$("wa-q").href = waLink("Hola, estuve en la charla de Vive+ y tengo esta pregunta: ");
+$("again").addEventListener("click", () => {
+  $("res").hidden = true; $("f").hidden = false; $("ok-datos").checked = false; updateWa();
+  $("f").scrollIntoView({block:"start"});
+});
+</script>
+
+</body></html>
