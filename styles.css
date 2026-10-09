@@ -712,3 +712,14 @@ h1 {
 }
 .ig-strip h2 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; letter-spacing: -.04em; margin: 0; }
 .ig-btn { display: inline-flex; align-items: center; gap: 10px; }
+.ig-strip { flex-wrap: nowrap; }
+.ig-photo { width: clamp(120px, 14vw, 190px); height: auto; aspect-ratio: 600 / 719; object-fit: cover; border-radius: 24px; flex: none; }
+.ig-copy { flex: 1; min-width: 0; }
+.ig-copy p:not(.eyebrow) { margin: 12px 0 0; color: var(--soft); line-height: 1.6; max-width: 560px; }
+.ig-btn { flex: none; }
+@media (max-width: 760px) {
+  .ig-strip { flex-wrap: wrap; }
+  .ig-photo { width: 104px; }
+  .ig-copy { flex: 1 1 180px; }
+  .ig-btn { width: 100%; justify-content: center; }
+}
