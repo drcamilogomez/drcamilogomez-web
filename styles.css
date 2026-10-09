@@ -700,8 +700,15 @@ h1 {
 }
 
 
-#reels:empty { display: none; }
 #opiniones .hero-actions { display: flex; gap: 14px; }
 
-.reels { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
-.reels .instagram-media { min-width: 280px !important; max-width: 360px !important; width: 100% !important; margin: 0 !important; border-radius: 24px !important; }
+
+.ig-strip {
+  margin: 0 clamp(22px, 5vw, 72px);
+  padding: clamp(28px, 4vw, 44px) clamp(24px, 4vw, 52px);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  border-radius: 32px; background: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 20px 52px rgba(58,58,58,.06);
+}
+.ig-strip h2 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; letter-spacing: -.04em; margin: 0; }
+.ig-btn { display: inline-flex; align-items: center; gap: 10px; }
