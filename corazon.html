@@ -86,7 +86,7 @@ footer b{color:var(--ink)}
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Vive+ Medellín 2026 · Test de 60 segundos</div>
+    <div class="eyebrow" id="eyebrow">Vive+ Medellín 2026 · Test de 60 segundos</div>
     <h1>¿Qué edad tiene tu corazón?</h1>
     <svg class="ecg" viewBox="0 0 560 44" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26H120l8-6 8 6h20l6 4 8-28 8 38 7-14h28l10-8 12 8H330l8-6 8 6h20l6 4 8-28 8 38 7-14h28l10-8 12 8H560"/></svg>
     <p class="lede">La edad que no aparece en tu cédula. Responde 7 preguntas y te mostramos una estimación basada en el estudio de Framingham.</p>
@@ -183,7 +183,7 @@ footer b{color:var(--ink)}
 
     <label class="consent" for="ok-datos"><input type="checkbox" id="ok-datos"><span id="consent-text"></span></label>
     <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Recibir mi plan de 30 días por WhatsApp</a>
-    <a class="btn ghost" id="wa-q" href="#" target="_blank" rel="noopener">Enviar una pregunta para la charla</a>
+    <a class="btn ghost" id="wa-q" hidden href="#" target="_blank" rel="noopener">Enviar una pregunta para la charla</a>
     <button class="btn ghost" type="button" id="again">Hacer el test otra vez</button>
     <p class="disc">Estimación educativa con el modelo de Framingham sin exámenes de laboratorio (D'Agostino et al., 2008). Es más precisa entre los 30 y los 74 años y no reemplaza una valoración médica.</p>
   </section>
@@ -191,7 +191,7 @@ footer b{color:var(--ink)}
   <footer>
     <span><b id="doc-name"></b> · <span id="doc-title"></span></span>
     <a href="https://www.drcamilogomez.com" target="_blank" rel="noopener" style="color:var(--pulse);font-weight:600">www.drcamilogomez.com</a>
-    <span>Vive+ Medellín · 8 y 9 de octubre de 2026</span>
+    <span id="evento-pie">Vive+ Medellín · 8 y 9 de octubre de 2026</span>
   </footer>
 </div>
 
@@ -209,6 +209,16 @@ document.getElementById("consent-text").textContent =
   "Autorizo a " + CONFIG.doctor + " a tratar estos datos para enviarme mi resultado, contenidos de salud cardiovascular e invitaciones, según la Ley 1581 de 2012. Puedo pedir que me retiren cuando quiera.";
 
 // Framingham 2008, modelo con IMC (sin laboratorio)
+// Modo evento Vive+: activo hasta la medianoche del 9 de octubre de 2026 (hora de Colombia).
+// Después, la página queda como test permanente de la web, sin referencias a la charla.
+const EVENTO = Date.now() < Date.parse("2026-10-10T05:00:00Z");
+if (!EVENTO) {
+  document.getElementById("eyebrow").textContent = "Dr. Camilo Gómez · Test de 60 segundos";
+  document.getElementById("evento-pie").hidden = true;
+} else {
+  document.getElementById("wa-q").hidden = false;
+}
+
 const COEF = {
   M:{a:3.11296,b:0.79277,su:1.85508,st:1.92672,s:0.70953,d:0.53160,S0:0.88431,m:23.9388},
   F:{a:2.72107,b:0.51125,su:2.81291,st:2.88267,s:0.61868,d:0.77763,S0:0.94833,m:26.0145}
@@ -272,7 +282,7 @@ $("f").addEventListener("submit", e => {
 
   if (!pas){
     const hi = framingham(sexo, ageM, Math.min(50, Math.max(15, bmi)), 145, trat==="1", +fuma, +dm);
-    msg = "Tu resultado está incompleto: calculamos con una presión normal (125). Si la tuya fuera 145, tu corazón tendría unos " + Math.round(hi.heartAge) + " años. Pide tu plan por WhatsApp y te invitamos a medirla sin costo en la Semana del Corazón.";
+    msg = "Tu resultado está incompleto: calculamos con una presión normal (125). Si la tuya fuera 145, tu corazón tendría unos " + Math.round(hi.heartAge) + " años. " + (EVENTO ? "Pide tu plan por WhatsApp y te invitamos a medirla sin costo en la Semana del Corazón." : "Escríbenos por WhatsApp y te ayudamos a agendar una toma de presión.");
   }
   $("r-msg").textContent = msg;
 
@@ -297,7 +307,7 @@ function updateWa(){
   const a = $("wa");
   a.setAttribute("aria-disabled", ok ? "false" : "true");
   if (last){
-    a.href = waLink("Hola, soy " + (last.nombre || "asistente de Vive+") + ". Hice el test en Vive+ Medellín: tengo " + last.edad + " años y mi corazón dio " + last.ha + ". " + (last.pas ? "Mi presión es " + last.pas + "." : "No sé mi presión.") + " Autorizo el tratamiento de mis datos y quiero recibir mi plan de 30 días.");
+    a.href = waLink("Hola, soy " + (last.nombre || (EVENTO ? "asistente de Vive+" : "visitante de su página")) + ". Hice el test " + (EVENTO ? "en Vive+ Medellín" : "en su página web") + ": tengo " + last.edad + " años y mi corazón dio " + last.ha + ". " + (last.pas ? "Mi presión es " + last.pas + "." : "No sé mi presión.") + " Autorizo el tratamiento de mis datos y quiero recibir mi plan de 30 días.");
   }
 }
 $("ok-datos").addEventListener("change", updateWa);
