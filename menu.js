@@ -1,13 +1,14 @@
 // Menú lateral (tres rayitas) compartido por todas las páginas.
 (function () {
   var WA = "https://wa.me/573052742623?text=" + encodeURIComponent("Hola Dr. Camilo, vengo de su página web y quiero agendar una cita.");
-  var MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Edificio Access Point, Carrera 22 17-325, Medellín, Colombia");
+  var MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Dr Camilo Gómez Cardiólogo, Medellín");
   var groups = [
     ["Inicio", [
       ["Inicio", "/"],
       ["Conóceme", "/#medico"],
       ["Especialidades", "/#especialidades"],
-      ["Tu consulta", "/#historias"]
+      ["Tu consulta", "/#historias"],
+      ["Opiniones de pacientes", "/#opiniones"]
     ]],
     ["Servicios", [
       ["Chequeo Ejecutivo Cardiovascular", "/chequeo-cardiovascular-medellin"],
@@ -19,7 +20,8 @@
       ["Colesterol en 2 minutos", "/colesterol-en-2-minutos-medellin"]
     ]],
     ["Gratis", [
-      ["¿Qué edad tiene tu corazón? Test de 60 segundos", "/corazon"]
+      ["¿Qué edad tiene tu corazón? Test de 60 segundos", "/corazon"],
+      ["Videos en Instagram · @cardiologocamilogomez", "https://www.instagram.com/cardiologocamilogomez/"]
     ]]
   ];
 
@@ -50,7 +52,8 @@
     html += '<p class="menu-group">' + g[0] + '</p><ul>';
     g[1].forEach(function (l) {
       var cur = (l[1] === here) ? ' aria-current="page"' : '';
-      html += '<li><a href="' + l[1] + '"' + cur + '>' + l[0] + '</a></li>';
+      var ext = l[1].indexOf('http') === 0 ? ' target="_blank" rel="noopener"' : '';
+      html += '<li><a href="' + l[1] + '"' + cur + ext + '>' + l[0] + '</a></li>';
     });
     html += '</ul>';
   });
