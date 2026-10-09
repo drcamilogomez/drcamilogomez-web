@@ -702,3 +702,6 @@ h1 {
 
 #reels:empty { display: none; }
 #opiniones .hero-actions { display: flex; gap: 14px; }
+
+.reels { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.reels .instagram-media { min-width: 280px !important; max-width: 360px !important; width: 100% !important; margin: 0 !important; border-radius: 24px !important; }
