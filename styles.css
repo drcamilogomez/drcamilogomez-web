@@ -376,7 +376,7 @@ h1 {
   border-top: 1px solid var(--line);
 }
 
-..specialty {
+.specialty {
   display: grid;
   grid-template-columns: 70px minmax(360px, 0.9fr) minmax(420px, 1.1fr);
   gap: 34px;
@@ -681,4 +681,20 @@ h1 {
     .leadership-grid {
         grid-template-columns: 1fr;
     }
+}
+.footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.footer p:last-child {
+  text-align: right;
+}
+@media (max-width: 760px) {
+  .footer { flex-direction: column; }
+  .footer p:last-child { text-align: left; }
+}
+@media (max-width: 940px) {
+  .services-list { grid-template-columns: minmax(0, 1fr); }
+  .service-item p { min-width: 0; }
 }
