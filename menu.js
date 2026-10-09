@@ -94,3 +94,11 @@
     if (e.key === "Escape" && !panel.hidden) close();
   });
 })();
+
+// Medición: cada clic en WhatsApp se registra en Google Tag Manager como el evento "whatsapp_click".
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+  if (!a) return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "whatsapp_click", pagina: location.pathname, boton: a.id || (a.textContent || "").trim().slice(0, 60) });
+});

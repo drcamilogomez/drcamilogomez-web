@@ -217,7 +217,7 @@ const CONFIG = {
 document.getElementById("doc-name").textContent = CONFIG.doctor;
 document.getElementById("doc-title").textContent = CONFIG.titulo;
 document.getElementById("consent-text").textContent =
-  "Autorizo a " + CONFIG.doctor + " a tratar estos datos para enviarme mi resultado, contenidos de salud cardiovascular e invitaciones, según la Ley 1581 de 2012. Puedo pedir que me retiren cuando quiera.";
+  "Autorizo a " + CONFIG.doctor + " a tratar estos datos para enviarme mi resultado, contenidos de salud cardiovascular e invitaciones, según la Ley 1581 de 2012. Puedo pedir que me retiren cuando quiera. Ver la política de datos en drcamilogomez.com/politica-de-datos.";
 
 // Framingham 2008, modelo con IMC (sin laboratorio)
 // Modo evento Vive+: activo hasta la medianoche del 9 de octubre de 2026 (hora de Colombia).
@@ -322,6 +322,12 @@ function updateWa(){
   }
 }
 $("ok-datos").addEventListener("change", updateWa);
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+  if (!a) return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "whatsapp_click", pagina: "/corazon", boton: a.id });
+});
 $("wa-q").href = waLink("Hola, estuve en la charla de Vive+ y tengo esta pregunta: ");
 $("again").addEventListener("click", () => {
   $("res").hidden = true; $("f").hidden = false; $("ok-datos").checked = false; updateWa();

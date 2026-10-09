@@ -723,3 +723,19 @@ h1 {
   .ig-copy { flex: 1 1 180px; }
   .ig-btn { width: 100%; justify-content: center; }
 }
+
+.formacion { margin-top: 48px; padding: clamp(24px, 3vw, 40px); border-radius: 30px; background: rgba(255,255,255,.58); border: 1px solid rgba(255,255,255,.68); box-shadow: 0 20px 52px rgba(58,58,58,.06); position: relative; }
+.formacion ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.formacion li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.formacion li:last-child { border-bottom: 0; }
+.formacion strong { font-weight: 650; letter-spacing: -.02em; }
+.formacion span { color: var(--soft); }
+.consulta-note { margin: 28px 0 0; padding: 20px 24px; border-radius: 22px; background: rgba(51,199,199,.10); color: var(--graphite); line-height: 1.6; max-width: 900px; }
+.legal { max-width: 820px; margin: 0 auto; padding: 140px clamp(22px, 5vw, 72px) 80px; }
+.legal h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1; }
+.legal h2 { font-size: 24px; margin: 36px 0 12px; letter-spacing: -.03em; }
+.legal p, .legal li { color: var(--soft); line-height: 1.7; }
+@media (max-width: 560px) {
+  h1 { font-size: clamp(40px, 11vw, 54px); }
+  .formacion li { grid-template-columns: 1fr; gap: 4px; }
+}
